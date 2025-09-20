@@ -62,4 +62,4 @@
 ## Today’s Focus
 - [ ] Verify `api/health` works
 - [ ] Fix DELETE 404 (ensure API path + restart + cache cleared)
-- [ ] Replace remaining `<a>` with `next/link` + `prefetch={false}` in list & header
+- [ ] Replace remaining `<a>` with `next/link` + `prefetch={false}` in list & header- [x] Started DELETE flow PR
