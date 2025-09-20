@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Prospect {
+  id           String   @id @default(cuid())
+
+  // split name
+  firstName    String
+  lastName     String
+
+  company      String?
+  email        String?
+  phone        String?
+
+  // stored as DateTime (UTC). UI shows/accepts dd-m-yyyy.
+  firstContact DateTime
+
+  // keep as String for SQLite
+  status       String   @default("Pending")
+  notes        String?
+
+  touches      Touch[]
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Touch {
+  id         String   @id @default(cuid())
+  index      Int
+  name       String
+  due        DateTime
+  status     String   @default("Pending")
+  notes      String?
+
+  prospect   Prospect @relation(fields: [prospectId], references: [id], onDelete: Cascade)
+  prospectId String
+}
